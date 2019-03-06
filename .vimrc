@@ -24,7 +24,6 @@ Plugin 'scrooloose/syntastic'
 Plugin 'vim-airline/vim-airline'
 Plugin 'tpope/vim-commentary'
 Plugin 'yggdroot/indentline'
-Plugin 'jiangmiao/auto-pairs'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
@@ -73,6 +72,8 @@ map <C-t> :NERDTreeToggle<CR>
 vnoremap <Leader>y "+y
 vnoremap <Leader>p "+p
 
+"Buffers"
+nnoremap <C-b> :buffers<CR>:buffer<Space>
 "Insert Mappings"
 imap jk <Esc>
 
@@ -81,10 +82,16 @@ tnoremap jk <C-\><C-n>
 
 "Non Recursive Mappings"
 nnoremap <C-N> :bnext<CR>
-nnoremap <C-P> :bprev<CR>
+nnoremap <C-M> :bprev<CR>
 "Show all buffers
 let g:airline#extensions#tabline#enabled = 1
 
+" FZF stuff
+nnoremap <C-P> :FZF<CR>
+" Mapping selecting mappings
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
 
 " Save last buffer position
 autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif 
