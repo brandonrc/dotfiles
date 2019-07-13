@@ -13,7 +13,7 @@ def randomStringDigits(stringLength=10):
 port = random.randint(30000,50000)
 name = randomStringDigits(10)
 
-startDocker = 'docker run -d --name ' + str(name) + ' -p ' + str(port) + ':3389 kxes/desktop'
+startDocker = 'docker run -d --name ' + str(name) + ' -p ' + str(port) + ':6901 consol/ubuntu-xfce-vnc'
 
 print(startDocker)
 
