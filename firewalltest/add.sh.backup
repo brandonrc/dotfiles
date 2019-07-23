@@ -1,0 +1,22 @@
+#! /bin/sh
+# -i br+ is a wild card for any interface that starts with 
+# br. Docker network seems to create network interfacecs on the fly with those.
+
+iptables -I INPUT -i br+ -m state --state RELATED,ESTABLISHED -j ACCEPT
+#iptables -A OUTPUT -o br+ -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -I INPUT -i br+ -p tcp --sport 5900 -m state --state NEW -j ACCEPT
+
+iptables -I INPUT -i br+ -p tcp --dport 6901 -j ACCEPT
+iptables -I OUTPUT -o br+ -p tcp --sport 6901 -j ACCEPT
+iptables -I FORWARD -i br+ -p tcp --dport 6901 -j ACCEPT
+
+iptables -I INPUT -i br+ -j DROP
+iptables -I OUTPUT -o br+ -j DROP
+iptables -I FORWARD -i br+ -j DROP
+
+# iptables -I INPUT -p tcp --dport 6901 -m state --state NEW,ESTABLISHED -j ACCEPT
+# iptables -I OUTPUT -p tcp --sport 6901 -m state --state ESTABLISHED -j ACCEPT
+
+iptables -I INPUT -i br+ -m state --state RELATED,ESTABLISHED -j ACCEPT
+#iptables -A OUTPUT -o br+ -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -I INPUT -i br+ -p tcp --sport 5900 -m state --state NEW -j ACCEPT
